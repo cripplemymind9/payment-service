@@ -19,20 +19,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_ReservePayment_FullMethodName    = "/api.v1.paymentservice.PaymentService/ReservePayment"
-	PaymentService_CompensatePayment_FullMethodName = "/api.v1.paymentservice.PaymentService/CompensatePayment"
+	PaymentService_ReserveUserBalance_FullMethodName    = "/api.v1.paymentservice.PaymentService/ReserveUserBalance"
+	PaymentService_CompensateUserBalance_FullMethodName = "/api.v1.paymentservice.PaymentService/CompensateUserBalance"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Сервис управления платежами
+// Сервис управления балансом пользователей
 type PaymentServiceClient interface {
-	// Резервирование денег
-	ReservePayment(ctx context.Context, in *ReservePaymentRequest, opts ...grpc.CallOption) (*ReservePaymentResponse, error)
-	// Компенсация денег (отмена резервирования)
-	CompensatePayment(ctx context.Context, in *CompensatePaymentRequest, opts ...grpc.CallOption) (*CompensatePaymentResponse, error)
+	// Резервирование баланса пользователя
+	ReserveUserBalance(ctx context.Context, in *ReserveUserBalanceRequest, opts ...grpc.CallOption) (*ReserveUserBalanceResponse, error)
+	// Компенсация баланса пользователя (отмена резервирования)
+	CompensateUserBalance(ctx context.Context, in *CompensateUserBalanceRequest, opts ...grpc.CallOption) (*CompensateUserBalanceResponse, error)
 }
 
 type paymentServiceClient struct {
@@ -43,20 +43,20 @@ func NewPaymentServiceClient(cc grpc.ClientConnInterface) PaymentServiceClient {
 	return &paymentServiceClient{cc}
 }
 
-func (c *paymentServiceClient) ReservePayment(ctx context.Context, in *ReservePaymentRequest, opts ...grpc.CallOption) (*ReservePaymentResponse, error) {
+func (c *paymentServiceClient) ReserveUserBalance(ctx context.Context, in *ReserveUserBalanceRequest, opts ...grpc.CallOption) (*ReserveUserBalanceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReservePaymentResponse)
-	err := c.cc.Invoke(ctx, PaymentService_ReservePayment_FullMethodName, in, out, cOpts...)
+	out := new(ReserveUserBalanceResponse)
+	err := c.cc.Invoke(ctx, PaymentService_ReserveUserBalance_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentServiceClient) CompensatePayment(ctx context.Context, in *CompensatePaymentRequest, opts ...grpc.CallOption) (*CompensatePaymentResponse, error) {
+func (c *paymentServiceClient) CompensateUserBalance(ctx context.Context, in *CompensateUserBalanceRequest, opts ...grpc.CallOption) (*CompensateUserBalanceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CompensatePaymentResponse)
-	err := c.cc.Invoke(ctx, PaymentService_CompensatePayment_FullMethodName, in, out, cOpts...)
+	out := new(CompensateUserBalanceResponse)
+	err := c.cc.Invoke(ctx, PaymentService_CompensateUserBalance_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -67,12 +67,12 @@ func (c *paymentServiceClient) CompensatePayment(ctx context.Context, in *Compen
 // All implementations must embed UnimplementedPaymentServiceServer
 // for forward compatibility.
 //
-// Сервис управления платежами
+// Сервис управления балансом пользователей
 type PaymentServiceServer interface {
-	// Резервирование денег
-	ReservePayment(context.Context, *ReservePaymentRequest) (*ReservePaymentResponse, error)
-	// Компенсация денег (отмена резервирования)
-	CompensatePayment(context.Context, *CompensatePaymentRequest) (*CompensatePaymentResponse, error)
+	// Резервирование баланса пользователя
+	ReserveUserBalance(context.Context, *ReserveUserBalanceRequest) (*ReserveUserBalanceResponse, error)
+	// Компенсация баланса пользователя (отмена резервирования)
+	CompensateUserBalance(context.Context, *CompensateUserBalanceRequest) (*CompensateUserBalanceResponse, error)
 	mustEmbedUnimplementedPaymentServiceServer()
 }
 
@@ -83,11 +83,11 @@ type PaymentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPaymentServiceServer struct{}
 
-func (UnimplementedPaymentServiceServer) ReservePayment(context.Context, *ReservePaymentRequest) (*ReservePaymentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReservePayment not implemented")
+func (UnimplementedPaymentServiceServer) ReserveUserBalance(context.Context, *ReserveUserBalanceRequest) (*ReserveUserBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReserveUserBalance not implemented")
 }
-func (UnimplementedPaymentServiceServer) CompensatePayment(context.Context, *CompensatePaymentRequest) (*CompensatePaymentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CompensatePayment not implemented")
+func (UnimplementedPaymentServiceServer) CompensateUserBalance(context.Context, *CompensateUserBalanceRequest) (*CompensateUserBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompensateUserBalance not implemented")
 }
 func (UnimplementedPaymentServiceServer) mustEmbedUnimplementedPaymentServiceServer() {}
 func (UnimplementedPaymentServiceServer) testEmbeddedByValue()                        {}
@@ -110,38 +110,38 @@ func RegisterPaymentServiceServer(s grpc.ServiceRegistrar, srv PaymentServiceSer
 	s.RegisterService(&PaymentService_ServiceDesc, srv)
 }
 
-func _PaymentService_ReservePayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReservePaymentRequest)
+func _PaymentService_ReserveUserBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReserveUserBalanceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).ReservePayment(ctx, in)
+		return srv.(PaymentServiceServer).ReserveUserBalance(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_ReservePayment_FullMethodName,
+		FullMethod: PaymentService_ReserveUserBalance_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).ReservePayment(ctx, req.(*ReservePaymentRequest))
+		return srv.(PaymentServiceServer).ReserveUserBalance(ctx, req.(*ReserveUserBalanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentService_CompensatePayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CompensatePaymentRequest)
+func _PaymentService_CompensateUserBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CompensateUserBalanceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).CompensatePayment(ctx, in)
+		return srv.(PaymentServiceServer).CompensateUserBalance(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_CompensatePayment_FullMethodName,
+		FullMethod: PaymentService_CompensateUserBalance_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).CompensatePayment(ctx, req.(*CompensatePaymentRequest))
+		return srv.(PaymentServiceServer).CompensateUserBalance(ctx, req.(*CompensateUserBalanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -154,12 +154,12 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PaymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ReservePayment",
-			Handler:    _PaymentService_ReservePayment_Handler,
+			MethodName: "ReserveUserBalance",
+			Handler:    _PaymentService_ReserveUserBalance_Handler,
 		},
 		{
-			MethodName: "CompensatePayment",
-			Handler:    _PaymentService_CompensatePayment_Handler,
+			MethodName: "CompensateUserBalance",
+			Handler:    _PaymentService_CompensateUserBalance_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

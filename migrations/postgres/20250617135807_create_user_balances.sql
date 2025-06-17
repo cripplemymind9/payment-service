@@ -1,6 +1,6 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE payments (
+CREATE TABLE user_balances (
     user_id INTEGER PRIMARY KEY,
     total_balance INTEGER NOT NULL DEFAULT 0,
     reserved_balance INTEGER NOT NULL DEFAULT 0,
@@ -14,10 +14,10 @@ CREATE TABLE payments (
     )
 );
 
-CREATE INDEX idx_payments_user_id ON payments(user_id);
+CREATE INDEX idx_user_balances_user_id ON user_balances(user_id);
 -- +goose StatementEnd
 
 -- +goose Down
 -- +goose StatementBegin
-DROP TABLE IF EXISTS payments;
+DROP TABLE IF EXISTS user_balances;
 -- +goose StatementEnd

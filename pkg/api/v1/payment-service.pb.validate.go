@@ -35,22 +35,22 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on ReservePaymentRequest with the rules
+// Validate checks the field values on ReserveUserBalanceRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ReservePaymentRequest) Validate() error {
+func (m *ReserveUserBalanceRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ReservePaymentRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ReserveUserBalanceRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ReservePaymentRequestMultiError, or nil if none found.
-func (m *ReservePaymentRequest) ValidateAll() error {
+// ReserveUserBalanceRequestMultiError, or nil if none found.
+func (m *ReserveUserBalanceRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ReservePaymentRequest) validate(all bool) error {
+func (m *ReserveUserBalanceRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -58,7 +58,7 @@ func (m *ReservePaymentRequest) validate(all bool) error {
 	var errors []error
 
 	if m.GetUserId() <= 0 {
-		err := ReservePaymentRequestValidationError{
+		err := ReserveUserBalanceRequestValidationError{
 			field:  "UserId",
 			reason: "value must be greater than 0",
 		}
@@ -69,7 +69,7 @@ func (m *ReservePaymentRequest) validate(all bool) error {
 	}
 
 	if m.GetAmount() <= 0 {
-		err := ReservePaymentRequestValidationError{
+		err := ReserveUserBalanceRequestValidationError{
 			field:  "Amount",
 			reason: "value must be greater than 0",
 		}
@@ -80,351 +80,19 @@ func (m *ReservePaymentRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ReservePaymentRequestMultiError(errors)
+		return ReserveUserBalanceRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ReservePaymentRequestMultiError is an error wrapping multiple validation
-// errors returned by ReservePaymentRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ReservePaymentRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ReservePaymentRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ReservePaymentRequestMultiError) AllErrors() []error { return m }
-
-// ReservePaymentRequestValidationError is the validation error returned by
-// ReservePaymentRequest.Validate if the designated constraints aren't met.
-type ReservePaymentRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ReservePaymentRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ReservePaymentRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ReservePaymentRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ReservePaymentRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ReservePaymentRequestValidationError) ErrorName() string {
-	return "ReservePaymentRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ReservePaymentRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sReservePaymentRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ReservePaymentRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ReservePaymentRequestValidationError{}
-
-// Validate checks the field values on ReservePaymentResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ReservePaymentResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ReservePaymentResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ReservePaymentResponseMultiError, or nil if none found.
-func (m *ReservePaymentResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ReservePaymentResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Status
-
-	if len(errors) > 0 {
-		return ReservePaymentResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// ReservePaymentResponseMultiError is an error wrapping multiple validation
-// errors returned by ReservePaymentResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ReservePaymentResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ReservePaymentResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ReservePaymentResponseMultiError) AllErrors() []error { return m }
-
-// ReservePaymentResponseValidationError is the validation error returned by
-// ReservePaymentResponse.Validate if the designated constraints aren't met.
-type ReservePaymentResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ReservePaymentResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ReservePaymentResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ReservePaymentResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ReservePaymentResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ReservePaymentResponseValidationError) ErrorName() string {
-	return "ReservePaymentResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ReservePaymentResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sReservePaymentResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ReservePaymentResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ReservePaymentResponseValidationError{}
-
-// Validate checks the field values on CompensatePaymentRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CompensatePaymentRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on CompensatePaymentRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CompensatePaymentRequestMultiError, or nil if none found.
-func (m *CompensatePaymentRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *CompensatePaymentRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if m.GetUserId() <= 0 {
-		err := CompensatePaymentRequestValidationError{
-			field:  "UserId",
-			reason: "value must be greater than 0",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if m.GetAmount() <= 0 {
-		err := CompensatePaymentRequestValidationError{
-			field:  "Amount",
-			reason: "value must be greater than 0",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return CompensatePaymentRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// CompensatePaymentRequestMultiError is an error wrapping multiple validation
-// errors returned by CompensatePaymentRequest.ValidateAll() if the designated
-// constraints aren't met.
-type CompensatePaymentRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m CompensatePaymentRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m CompensatePaymentRequestMultiError) AllErrors() []error { return m }
-
-// CompensatePaymentRequestValidationError is the validation error returned by
-// CompensatePaymentRequest.Validate if the designated constraints aren't met.
-type CompensatePaymentRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e CompensatePaymentRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e CompensatePaymentRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e CompensatePaymentRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e CompensatePaymentRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e CompensatePaymentRequestValidationError) ErrorName() string {
-	return "CompensatePaymentRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e CompensatePaymentRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sCompensatePaymentRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = CompensatePaymentRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = CompensatePaymentRequestValidationError{}
-
-// Validate checks the field values on CompensatePaymentResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CompensatePaymentResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on CompensatePaymentResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CompensatePaymentResponseMultiError, or nil if none found.
-func (m *CompensatePaymentResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *CompensatePaymentResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Status
-
-	if len(errors) > 0 {
-		return CompensatePaymentResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// CompensatePaymentResponseMultiError is an error wrapping multiple validation
-// errors returned by CompensatePaymentResponse.ValidateAll() if the
+// ReserveUserBalanceRequestMultiError is an error wrapping multiple validation
+// errors returned by ReserveUserBalanceRequest.ValidateAll() if the
 // designated constraints aren't met.
-type CompensatePaymentResponseMultiError []error
+type ReserveUserBalanceRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CompensatePaymentResponseMultiError) Error() string {
+func (m ReserveUserBalanceRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -433,11 +101,11 @@ func (m CompensatePaymentResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CompensatePaymentResponseMultiError) AllErrors() []error { return m }
+func (m ReserveUserBalanceRequestMultiError) AllErrors() []error { return m }
 
-// CompensatePaymentResponseValidationError is the validation error returned by
-// CompensatePaymentResponse.Validate if the designated constraints aren't met.
-type CompensatePaymentResponseValidationError struct {
+// ReserveUserBalanceRequestValidationError is the validation error returned by
+// ReserveUserBalanceRequest.Validate if the designated constraints aren't met.
+type ReserveUserBalanceRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -445,24 +113,24 @@ type CompensatePaymentResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e CompensatePaymentResponseValidationError) Field() string { return e.field }
+func (e ReserveUserBalanceRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CompensatePaymentResponseValidationError) Reason() string { return e.reason }
+func (e ReserveUserBalanceRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CompensatePaymentResponseValidationError) Cause() error { return e.cause }
+func (e ReserveUserBalanceRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CompensatePaymentResponseValidationError) Key() bool { return e.key }
+func (e ReserveUserBalanceRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CompensatePaymentResponseValidationError) ErrorName() string {
-	return "CompensatePaymentResponseValidationError"
+func (e ReserveUserBalanceRequestValidationError) ErrorName() string {
+	return "ReserveUserBalanceRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CompensatePaymentResponseValidationError) Error() string {
+func (e ReserveUserBalanceRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -474,14 +142,14 @@ func (e CompensatePaymentResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCompensatePaymentResponse.%s: %s%s",
+		"invalid %sReserveUserBalanceRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CompensatePaymentResponseValidationError{}
+var _ error = ReserveUserBalanceRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -489,4 +157,338 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CompensatePaymentResponseValidationError{}
+} = ReserveUserBalanceRequestValidationError{}
+
+// Validate checks the field values on ReserveUserBalanceResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReserveUserBalanceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReserveUserBalanceResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReserveUserBalanceResponseMultiError, or nil if none found.
+func (m *ReserveUserBalanceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReserveUserBalanceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return ReserveUserBalanceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReserveUserBalanceResponseMultiError is an error wrapping multiple
+// validation errors returned by ReserveUserBalanceResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ReserveUserBalanceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReserveUserBalanceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReserveUserBalanceResponseMultiError) AllErrors() []error { return m }
+
+// ReserveUserBalanceResponseValidationError is the validation error returned
+// by ReserveUserBalanceResponse.Validate if the designated constraints aren't met.
+type ReserveUserBalanceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReserveUserBalanceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReserveUserBalanceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReserveUserBalanceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReserveUserBalanceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReserveUserBalanceResponseValidationError) ErrorName() string {
+	return "ReserveUserBalanceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReserveUserBalanceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReserveUserBalanceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReserveUserBalanceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReserveUserBalanceResponseValidationError{}
+
+// Validate checks the field values on CompensateUserBalanceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CompensateUserBalanceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CompensateUserBalanceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CompensateUserBalanceRequestMultiError, or nil if none found.
+func (m *CompensateUserBalanceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CompensateUserBalanceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetUserId() <= 0 {
+		err := CompensateUserBalanceRequestValidationError{
+			field:  "UserId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAmount() <= 0 {
+		err := CompensateUserBalanceRequestValidationError{
+			field:  "Amount",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return CompensateUserBalanceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CompensateUserBalanceRequestMultiError is an error wrapping multiple
+// validation errors returned by CompensateUserBalanceRequest.ValidateAll() if
+// the designated constraints aren't met.
+type CompensateUserBalanceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CompensateUserBalanceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CompensateUserBalanceRequestMultiError) AllErrors() []error { return m }
+
+// CompensateUserBalanceRequestValidationError is the validation error returned
+// by CompensateUserBalanceRequest.Validate if the designated constraints
+// aren't met.
+type CompensateUserBalanceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CompensateUserBalanceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CompensateUserBalanceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CompensateUserBalanceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CompensateUserBalanceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CompensateUserBalanceRequestValidationError) ErrorName() string {
+	return "CompensateUserBalanceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CompensateUserBalanceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCompensateUserBalanceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CompensateUserBalanceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CompensateUserBalanceRequestValidationError{}
+
+// Validate checks the field values on CompensateUserBalanceResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CompensateUserBalanceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CompensateUserBalanceResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CompensateUserBalanceResponseMultiError, or nil if none found.
+func (m *CompensateUserBalanceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CompensateUserBalanceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return CompensateUserBalanceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CompensateUserBalanceResponseMultiError is an error wrapping multiple
+// validation errors returned by CompensateUserBalanceResponse.ValidateAll()
+// if the designated constraints aren't met.
+type CompensateUserBalanceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CompensateUserBalanceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CompensateUserBalanceResponseMultiError) AllErrors() []error { return m }
+
+// CompensateUserBalanceResponseValidationError is the validation error
+// returned by CompensateUserBalanceResponse.Validate if the designated
+// constraints aren't met.
+type CompensateUserBalanceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CompensateUserBalanceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CompensateUserBalanceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CompensateUserBalanceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CompensateUserBalanceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CompensateUserBalanceResponseValidationError) ErrorName() string {
+	return "CompensateUserBalanceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CompensateUserBalanceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCompensateUserBalanceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CompensateUserBalanceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CompensateUserBalanceResponseValidationError{}

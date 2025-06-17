@@ -12,6 +12,8 @@ import (
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 
+	"github.com/cripplemymind9/payment-service/internal/adapters/repo"
+	"github.com/cripplemymind9/payment-service/internal/domain/usecase"
 	"github.com/cripplemymind9/payment-service/internal/pkg/postgres"
 	"github.com/cripplemymind9/payment-service/migrations"
 
@@ -105,6 +107,14 @@ func getDB(ctx context.Context, cfg config.DB) (*postgres.DB, error) {
 }
 
 //nolint:unparam // Функция возвращает error для соответствия интерфейсу, но в текущей реализации ошибка всегда nil
-func getGRPCServerDependencies(_ config.Config, _ *postgres.DB) (*server.Dependencies, error) {
-	return server.NewDependencies(), nil
+func getGRPCServerDependencies(_ config.Config, db *postgres.DB) (*server.Dependencies, error) {
+	storage := repo.NewStorage(db)
+
+	reserveUserBalanceUC := usecase.NewReserveBalanceUseCase(storage)
+	cancelReservationUserBalanceUC := usecase.NewCancelReservationUserBalanceUseCase(storage)
+
+	return server.NewDependencies(
+		reserveUserBalanceUC,
+		cancelReservationUserBalanceUC,
+	), nil
 }
