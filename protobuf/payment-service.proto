@@ -26,42 +26,42 @@ enum ResponseStatus {
     INTERNAL_ERROR = 3;
 }
 
-// Сообщение для запроса резервирования денег
-message ReservePaymentRequest {
+// Сообщение для запроса резервирования баланса пользователя
+message ReserveUserBalanceRequest {
     int64 user_id = 1 [(validate.rules).int64.gt = 0];
     int64 amount = 2 [(validate.rules).int64.gt = 0];
 }
 
-// Сообщение для ответа на резервирование денег
-message ReservePaymentResponse {
+// Сообщение для ответа на резервирование баланса пользователя
+message ReserveUserBalanceResponse {
     ResponseStatus status = 1;
 }
 
-// Сообщение для запроса компенсации денег
-message CompensatePaymentRequest {
+// Сообщение для запроса компенсации баланса пользователя
+message CompensateUserBalanceRequest {
     int64 user_id = 1 [(validate.rules).int64.gt = 0];
     int64 amount = 2 [(validate.rules).int64.gt = 0];
 }
 
-// Сообщение для ответа на компенсацию денег
-message CompensatePaymentResponse {
+// Сообщение для ответа на компенсацию баланса пользователя
+message CompensateUserBalanceResponse {
     ResponseStatus status = 1;
 }
 
-// Сервис управления платежами
+// Сервис управления балансом пользователей
 service PaymentService {
-    // Резервирование денег
-    rpc ReservePayment(ReservePaymentRequest) returns (ReservePaymentResponse) {
+    // Резервирование баланса пользователя
+    rpc ReserveUserBalance(ReserveUserBalanceRequest) returns (ReserveUserBalanceResponse) {
         option (google.api.http) = {
-            post: "/api/v1/payment/reserve"
+            post: "/api/v1/balance/reserve"
             body: "*"
         };
     }
 
-    // Компенсация денег (отмена резервирования)
-    rpc CompensatePayment(CompensatePaymentRequest) returns (CompensatePaymentResponse) {
+    // Компенсация баланса пользователя (отмена резервирования)
+    rpc CompensateUserBalance(CompensateUserBalanceRequest) returns (CompensateUserBalanceResponse) {
         option (google.api.http) = {
-            post: "/api/v1/payment/compensate"
+            post: "/api/v1/balance/compensate"
             body: "*"
         };
     }

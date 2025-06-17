@@ -17,15 +17,15 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/payment/compensate": {
+    "/api/v1/balance/compensate": {
       "post": {
-        "summary": "Компенсация денег (отмена резервирования)",
-        "operationId": "PaymentService_CompensatePayment",
+        "summary": "Компенсация баланса пользователя (отмена резервирования)",
+        "operationId": "PaymentService_CompensateUserBalance",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/paymentserviceCompensatePaymentResponse"
+              "$ref": "#/definitions/paymentserviceCompensateUserBalanceResponse"
             }
           },
           "default": {
@@ -41,7 +41,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/paymentserviceCompensatePaymentRequest"
+              "$ref": "#/definitions/paymentserviceCompensateUserBalanceRequest"
             }
           }
         ],
@@ -50,15 +50,15 @@
         ]
       }
     },
-    "/api/v1/payment/reserve": {
+    "/api/v1/balance/reserve": {
       "post": {
-        "summary": "Резервирование денег",
-        "operationId": "PaymentService_ReservePayment",
+        "summary": "Резервирование баланса пользователя",
+        "operationId": "PaymentService_ReserveUserBalance",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/paymentserviceReservePaymentResponse"
+              "$ref": "#/definitions/paymentserviceReserveUserBalanceResponse"
             }
           },
           "default": {
@@ -74,7 +74,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/paymentserviceReservePaymentRequest"
+              "$ref": "#/definitions/paymentserviceReserveUserBalanceRequest"
             }
           }
         ],
@@ -85,7 +85,7 @@
     }
   },
   "definitions": {
-    "paymentserviceCompensatePaymentRequest": {
+    "paymentserviceCompensateUserBalanceRequest": {
       "type": "object",
       "properties": {
         "userId": {
@@ -97,18 +97,18 @@
           "format": "int64"
         }
       },
-      "title": "Сообщение для запроса компенсации денег"
+      "title": "Сообщение для запроса компенсации баланса пользователя"
     },
-    "paymentserviceCompensatePaymentResponse": {
+    "paymentserviceCompensateUserBalanceResponse": {
       "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/paymentserviceResponseStatus"
         }
       },
-      "title": "Сообщение для ответа на компенсацию денег"
+      "title": "Сообщение для ответа на компенсацию баланса пользователя"
     },
-    "paymentserviceReservePaymentRequest": {
+    "paymentserviceReserveUserBalanceRequest": {
       "type": "object",
       "properties": {
         "userId": {
@@ -120,16 +120,16 @@
           "format": "int64"
         }
       },
-      "title": "Сообщение для запроса резервирования денег"
+      "title": "Сообщение для запроса резервирования баланса пользователя"
     },
-    "paymentserviceReservePaymentResponse": {
+    "paymentserviceReserveUserBalanceResponse": {
       "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/paymentserviceResponseStatus"
         }
       },
-      "title": "Сообщение для ответа на резервирование денег"
+      "title": "Сообщение для ответа на резервирование баланса пользователя"
     },
     "paymentserviceResponseStatus": {
       "type": "string",

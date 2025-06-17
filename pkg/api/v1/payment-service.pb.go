@@ -78,8 +78,8 @@ func (ResponseStatus) EnumDescriptor() ([]byte, []int) {
 	return file_payment_service_proto_rawDescGZIP(), []int{0}
 }
 
-// Сообщение для запроса резервирования денег
-type ReservePaymentRequest struct {
+// Сообщение для запроса резервирования баланса пользователя
+type ReserveUserBalanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Amount        int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -87,20 +87,20 @@ type ReservePaymentRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ReservePaymentRequest) Reset() {
-	*x = ReservePaymentRequest{}
+func (x *ReserveUserBalanceRequest) Reset() {
+	*x = ReserveUserBalanceRequest{}
 	mi := &file_payment_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ReservePaymentRequest) String() string {
+func (x *ReserveUserBalanceRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReservePaymentRequest) ProtoMessage() {}
+func (*ReserveUserBalanceRequest) ProtoMessage() {}
 
-func (x *ReservePaymentRequest) ProtoReflect() protoreflect.Message {
+func (x *ReserveUserBalanceRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -112,47 +112,47 @@ func (x *ReservePaymentRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReservePaymentRequest.ProtoReflect.Descriptor instead.
-func (*ReservePaymentRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReserveUserBalanceRequest.ProtoReflect.Descriptor instead.
+func (*ReserveUserBalanceRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ReservePaymentRequest) GetUserId() int64 {
+func (x *ReserveUserBalanceRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *ReservePaymentRequest) GetAmount() int64 {
+func (x *ReserveUserBalanceRequest) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
 	return 0
 }
 
-// Сообщение для ответа на резервирование денег
-type ReservePaymentResponse struct {
+// Сообщение для ответа на резервирование баланса пользователя
+type ReserveUserBalanceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        ResponseStatus         `protobuf:"varint,1,opt,name=status,proto3,enum=api.v1.paymentservice.ResponseStatus" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ReservePaymentResponse) Reset() {
-	*x = ReservePaymentResponse{}
+func (x *ReserveUserBalanceResponse) Reset() {
+	*x = ReserveUserBalanceResponse{}
 	mi := &file_payment_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ReservePaymentResponse) String() string {
+func (x *ReserveUserBalanceResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReservePaymentResponse) ProtoMessage() {}
+func (*ReserveUserBalanceResponse) ProtoMessage() {}
 
-func (x *ReservePaymentResponse) ProtoReflect() protoreflect.Message {
+func (x *ReserveUserBalanceResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -164,20 +164,20 @@ func (x *ReservePaymentResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReservePaymentResponse.ProtoReflect.Descriptor instead.
-func (*ReservePaymentResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReserveUserBalanceResponse.ProtoReflect.Descriptor instead.
+func (*ReserveUserBalanceResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ReservePaymentResponse) GetStatus() ResponseStatus {
+func (x *ReserveUserBalanceResponse) GetStatus() ResponseStatus {
 	if x != nil {
 		return x.Status
 	}
 	return ResponseStatus_UNKNOWN
 }
 
-// Сообщение для запроса компенсации денег
-type CompensatePaymentRequest struct {
+// Сообщение для запроса компенсации баланса пользователя
+type CompensateUserBalanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Amount        int64                  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -185,20 +185,20 @@ type CompensatePaymentRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CompensatePaymentRequest) Reset() {
-	*x = CompensatePaymentRequest{}
+func (x *CompensateUserBalanceRequest) Reset() {
+	*x = CompensateUserBalanceRequest{}
 	mi := &file_payment_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CompensatePaymentRequest) String() string {
+func (x *CompensateUserBalanceRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CompensatePaymentRequest) ProtoMessage() {}
+func (*CompensateUserBalanceRequest) ProtoMessage() {}
 
-func (x *CompensatePaymentRequest) ProtoReflect() protoreflect.Message {
+func (x *CompensateUserBalanceRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -210,47 +210,47 @@ func (x *CompensatePaymentRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CompensatePaymentRequest.ProtoReflect.Descriptor instead.
-func (*CompensatePaymentRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CompensateUserBalanceRequest.ProtoReflect.Descriptor instead.
+func (*CompensateUserBalanceRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CompensatePaymentRequest) GetUserId() int64 {
+func (x *CompensateUserBalanceRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *CompensatePaymentRequest) GetAmount() int64 {
+func (x *CompensateUserBalanceRequest) GetAmount() int64 {
 	if x != nil {
 		return x.Amount
 	}
 	return 0
 }
 
-// Сообщение для ответа на компенсацию денег
-type CompensatePaymentResponse struct {
+// Сообщение для ответа на компенсацию баланса пользователя
+type CompensateUserBalanceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        ResponseStatus         `protobuf:"varint,1,opt,name=status,proto3,enum=api.v1.paymentservice.ResponseStatus" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CompensatePaymentResponse) Reset() {
-	*x = CompensatePaymentResponse{}
+func (x *CompensateUserBalanceResponse) Reset() {
+	*x = CompensateUserBalanceResponse{}
 	mi := &file_payment_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CompensatePaymentResponse) String() string {
+func (x *CompensateUserBalanceResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CompensatePaymentResponse) ProtoMessage() {}
+func (*CompensateUserBalanceResponse) ProtoMessage() {}
 
-func (x *CompensatePaymentResponse) ProtoReflect() protoreflect.Message {
+func (x *CompensateUserBalanceResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -262,12 +262,12 @@ func (x *CompensatePaymentResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CompensatePaymentResponse.ProtoReflect.Descriptor instead.
-func (*CompensatePaymentResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CompensateUserBalanceResponse.ProtoReflect.Descriptor instead.
+func (*CompensateUserBalanceResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CompensatePaymentResponse) GetStatus() ResponseStatus {
+func (x *CompensateUserBalanceResponse) GetStatus() ResponseStatus {
 	if x != nil {
 		return x.Status
 	}
@@ -278,25 +278,25 @@ var File_payment_service_proto protoreflect.FileDescriptor
 
 const file_payment_service_proto_rawDesc = "" +
 	"\n" +
-	"\x15payment-service.proto\x12\x15api.v1.paymentservice\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"Z\n" +
-	"\x15ReservePaymentRequest\x12 \n" +
+	"\x15payment-service.proto\x12\x15api.v1.paymentservice\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"^\n" +
+	"\x19ReserveUserBalanceRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06userId\x12\x1f\n" +
-	"\x06amount\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06amount\"W\n" +
-	"\x16ReservePaymentResponse\x12=\n" +
-	"\x06status\x18\x01 \x01(\x0e2%.api.v1.paymentservice.ResponseStatusR\x06status\"]\n" +
-	"\x18CompensatePaymentRequest\x12 \n" +
+	"\x06amount\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06amount\"[\n" +
+	"\x1aReserveUserBalanceResponse\x12=\n" +
+	"\x06status\x18\x01 \x01(\x0e2%.api.v1.paymentservice.ResponseStatusR\x06status\"a\n" +
+	"\x1cCompensateUserBalanceRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06userId\x12\x1f\n" +
-	"\x06amount\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06amount\"Z\n" +
-	"\x19CompensatePaymentResponse\x12=\n" +
+	"\x06amount\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x06amount\"^\n" +
+	"\x1dCompensateUserBalanceResponse\x12=\n" +
 	"\x06status\x18\x01 \x01(\x0e2%.api.v1.paymentservice.ResponseStatusR\x06status*Y\n" +
 	"\x0eResponseStatus\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\v\n" +
 	"\aSUCCESS\x10\x01\x12\x19\n" +
 	"\x15INSUFFICIENT_QUANTITY\x10\x02\x12\x12\n" +
-	"\x0eINTERNAL_ERROR\x10\x032\xc4\x02\n" +
-	"\x0ePaymentService\x12\x91\x01\n" +
-	"\x0eReservePayment\x12,.api.v1.paymentservice.ReservePaymentRequest\x1a-.api.v1.paymentservice.ReservePaymentResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/payment/reserve\x12\x9d\x01\n" +
-	"\x11CompensatePayment\x12/.api.v1.paymentservice.CompensatePaymentRequest\x1a0.api.v1.paymentservice.CompensatePaymentResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/v1/payment/compensateB\x81\x01\x92An\x12H\n" +
+	"\x0eINTERNAL_ERROR\x10\x032\xdc\x02\n" +
+	"\x0ePaymentService\x12\x9d\x01\n" +
+	"\x12ReserveUserBalance\x120.api.v1.paymentservice.ReserveUserBalanceRequest\x1a1.api.v1.paymentservice.ReserveUserBalanceResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/api/v1/balance/reserve\x12\xa9\x01\n" +
+	"\x15CompensateUserBalance\x123.api.v1.paymentservice.CompensateUserBalanceRequest\x1a4.api.v1.paymentservice.CompensateUserBalanceResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/api/v1/balance/compensateB\x81\x01\x92An\x12H\n" +
 	"\x0fPayment service\x12.Service for managing payments and reservations2\x051.0.02\x10application/json:\x10application/jsonZ\x0epkg/api/v1;apib\x06proto3"
 
 var (
@@ -314,19 +314,19 @@ func file_payment_service_proto_rawDescGZIP() []byte {
 var file_payment_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_payment_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_payment_service_proto_goTypes = []any{
-	(ResponseStatus)(0),               // 0: api.v1.paymentservice.ResponseStatus
-	(*ReservePaymentRequest)(nil),     // 1: api.v1.paymentservice.ReservePaymentRequest
-	(*ReservePaymentResponse)(nil),    // 2: api.v1.paymentservice.ReservePaymentResponse
-	(*CompensatePaymentRequest)(nil),  // 3: api.v1.paymentservice.CompensatePaymentRequest
-	(*CompensatePaymentResponse)(nil), // 4: api.v1.paymentservice.CompensatePaymentResponse
+	(ResponseStatus)(0),                   // 0: api.v1.paymentservice.ResponseStatus
+	(*ReserveUserBalanceRequest)(nil),     // 1: api.v1.paymentservice.ReserveUserBalanceRequest
+	(*ReserveUserBalanceResponse)(nil),    // 2: api.v1.paymentservice.ReserveUserBalanceResponse
+	(*CompensateUserBalanceRequest)(nil),  // 3: api.v1.paymentservice.CompensateUserBalanceRequest
+	(*CompensateUserBalanceResponse)(nil), // 4: api.v1.paymentservice.CompensateUserBalanceResponse
 }
 var file_payment_service_proto_depIdxs = []int32{
-	0, // 0: api.v1.paymentservice.ReservePaymentResponse.status:type_name -> api.v1.paymentservice.ResponseStatus
-	0, // 1: api.v1.paymentservice.CompensatePaymentResponse.status:type_name -> api.v1.paymentservice.ResponseStatus
-	1, // 2: api.v1.paymentservice.PaymentService.ReservePayment:input_type -> api.v1.paymentservice.ReservePaymentRequest
-	3, // 3: api.v1.paymentservice.PaymentService.CompensatePayment:input_type -> api.v1.paymentservice.CompensatePaymentRequest
-	2, // 4: api.v1.paymentservice.PaymentService.ReservePayment:output_type -> api.v1.paymentservice.ReservePaymentResponse
-	4, // 5: api.v1.paymentservice.PaymentService.CompensatePayment:output_type -> api.v1.paymentservice.CompensatePaymentResponse
+	0, // 0: api.v1.paymentservice.ReserveUserBalanceResponse.status:type_name -> api.v1.paymentservice.ResponseStatus
+	0, // 1: api.v1.paymentservice.CompensateUserBalanceResponse.status:type_name -> api.v1.paymentservice.ResponseStatus
+	1, // 2: api.v1.paymentservice.PaymentService.ReserveUserBalance:input_type -> api.v1.paymentservice.ReserveUserBalanceRequest
+	3, // 3: api.v1.paymentservice.PaymentService.CompensateUserBalance:input_type -> api.v1.paymentservice.CompensateUserBalanceRequest
+	2, // 4: api.v1.paymentservice.PaymentService.ReserveUserBalance:output_type -> api.v1.paymentservice.ReserveUserBalanceResponse
+	4, // 5: api.v1.paymentservice.PaymentService.CompensateUserBalance:output_type -> api.v1.paymentservice.CompensateUserBalanceResponse
 	4, // [4:6] is the sub-list for method output_type
 	2, // [2:4] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
